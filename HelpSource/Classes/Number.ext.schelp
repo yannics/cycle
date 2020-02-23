@@ -1,0 +1,28 @@
+INSTANCEMETHODS::
+
+subsection:: Cycle
+
+method:: lorenz
+In 1970, Birman, Guckenheimer, and Williams propose a model of dynamic discretization of Lorenz attractors, characterized by the periodicity of the orbits by a return to a point already crossed as a cycle.
+
+Let i be an element in the interval [0, 1] and I the set of points ordered in time calculated from i to t0, each point at t+1 is calculated as follows:
+
+i(t+1) = 2i(t) if i(t) < 1;
+
+i(t+1) = 2i(t)-1 if i(t) > 1;
+
+until i(tn+1) is element of I.
+
+Reference at https://www.chaos-math.org/en/chaos-vii-strange-attractors.html
+
+argument:: n
+round to multiple of n.
+
+returns:: an array with the cycle itself prepended by its 'path' if it exists.
+
+discussion::
+code::
+0.27.lorenz;
+0.27.lorenz.first; // the 'path'
+0.27.lorenz.last;  // the cycle
+::

@@ -1,0 +1,89 @@
+INSTANCEMETHODS::
+
+private:: asCycle
+private:: isEqual
+
+subsection:: Cycle
+
+method:: circPerm
+
+This algorithm consists of moving the first element of a list to the tail of this list. This is done n times with n equal to the length of the list according to a circular permutation cycle from a given radix to another.
+
+argument:: iBase
+initial base
+argument:: cBase
+circular base
+
+returns:: an array with the cycle as a circular permutation according to the radix as arguments.
+
+discussion::
+code::
+[1, 2, 3, 4].circPerm(10, 2);
+// the cycle
+[1, 2, 3, 4].circPerm(10, 2).first;
+// or
+[1, 2, 3, 4].circPerm(10, 2).last;
+::
+
+method:: interlace
+Based on the principle of ornamental interlace, each array as a 'pattern' is repeated some times according to the least common multiple to generate a complete cycle.
+
+returns:: an array where each element groups the circular permutations of each array as a 'pattern' such as the number of voices equal to the number of arrays.
+
+discussion::
+code::
+[(1..4), (1..8), (1..3)].interlace;
+// the cycle
+[(1..4), (1..8), (1..3)].interlace.first;
+// or
+[(1..4), (1..8), (1..3)].interlace.last;
+::
+
+method:: kaprekar
+Apply the method link::Classes/Integer#-kaprekar:: to an array according to a given radix (10 by default).
+
+argument:: base
+
+returns:: an array with the cycle itself prepended by its 'path' if it exists.
+
+discussion::
+code::
+[1, 2, 3, 4].kaprekar;
+[1, 2, 3, 4].kaprekar.first; // the 'path'
+[1, 2, 3, 4].kaprekar.last;  // the cycle
+::
+
+method:: pea
+Primarily developed by John Conway, the pea pattern is a variation of a 'look-and-say' sequence by counting the elements of a seed from the lowest number to the highest iteratively until the effectiveness of a cycle.
+
+returns:: an array with the cycle itself prepended by its 'path' if it exists.
+
+discussion::
+code::
+[1, 2, 3, 4].pea;
+[1, 2, 3, 4].pea.first; // the 'path'
+[1, 2, 3, 4].pea.last;  // the cycle
+::
+
+method:: sieve
+TODO
+
+method:: symGroup
+TODO
+
+method:: symPerm
+Highlighted by Olivier Messiaen, symmetric permutations constitute a system of numbered durations that consists in changing the order of its durations in order to obtain a limited number of rhythmic cells.
+
+argument:: arrayCode
+allow to re-order durations
+
+returns:: an array with the cycle as a symmetric permutation according to an re-ordered array as arguments.
+
+discussion::
+code::
+[3, 1, 2, 2].symPerm([3, 1, 4, 2]);
+// the cycle
+[3, 1, 2, 2].symPerm([3, 1, 4, 2]).first;
+// or
+[3, 1, 2, 2].symPerm([3, 1, 4, 2]).last;
+::

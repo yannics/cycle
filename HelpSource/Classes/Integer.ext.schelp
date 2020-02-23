@@ -1,0 +1,95 @@
+INSTANCEMETHODS::
+
+subsection:: Cycle
+
+method:: circPerm
+
+argument:: iBase
+in/out base
+argument:: cBase
+circular base
+
+returns:: an array with the cycle as a circular permutation according to the radix as arguments.
+
+discussion::
+See also link::Classes/Array#-circPerm::.
+code::
+1234.circPerm(10, 2);
+// the cycle
+1234.circPerm(10, 2).first;
+// or
+1234.circPerm(10, 2).last;
+::
+
+method:: collatz
+In 1928, Lothar Collatz invented a sequence built from a positive integer according to the following rules:
+
+if x(n) is even, then x(n+1) is equal to x(n) divided by 2;
+
+if x(n) is odd, then x(n+1) is equal to 1 plus x(n) multiplied by 3.
+
+The series thus constructed always ends – until the contrary is proved – by a trivial cycle (4 2 1) for positive integers. This hypothesis is called Syracuse conjecture.
+
+returns:: an array with the cycle itself prepended by its 'path' if it exists.
+
+discussion::
+code::
+1234.collatz;
+1234.collatz.first; // the 'path'
+1234.collatz.last;  // the cycle
+::
+
+method:: euclidean
+Application of Bjorklund's algorithm of uniformly distributing some rhythmic impacts in a given interval of rhythmic units – according to Euclid's algorithm determining the greatest common divisor (GCD) [Book VII of the Elements of Euclid].
+
+Reference at http://cgm.cs.mcgill.ca/~godfried/publications/banff.pdf
+
+argument:: n
+total 'duration' as a number of pulses
+argument:: ratio
+Boolean
+
+returns::
+a binary sequence or an array of relative durations if ratio is set to true.
+
+discussion::
+code::
+5.euclidean(8);
+5.euclidean(8, true);
+// the cycle
+5.euclidean(8).first;
+// or
+5.euclidean(8).last;
+::
+
+method:: kaprekar
+The Kaprekar's algorithm consists to associate any number x to another number K(x) generated as follow:
+
+According to the digits of x in radix n, one forms the number x1 by ranking in increasing order these digits and the number x2 by ranking in decreasing order.
+
+Then K(x) = x2 - x1.
+
+The process is iterated until a cyclic redundancy.
+
+argument:: base
+
+returns:: an array with the cycle itself prepended by its 'path' if it exists.
+
+discussion::
+code::
+1234.kaprekar;
+1234.kaprekar.first; // the 'path'
+1234.kaprekar.last;  // the cycle
+::
+
+method:: pea
+Apply the method link::Classes/Array#-pea:: to a single positive integer.
+
+returns:: an array with the cycle itself prepended by its 'path' if it exists.
+
+discussion::
+code::
+1.pea;
+1.pea.first; // the 'path'
+1.pea.last;  // the cycle
+::
