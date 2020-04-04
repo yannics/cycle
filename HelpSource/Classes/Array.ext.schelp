@@ -4,7 +4,7 @@ private:: asCycle
 private:: isEqual
 
 subsection:: Cycle
-Cycle includes the methods link::Classes/Array#-circPerm::, link::Classes/Array#-interlace::, link::Classes/Array#-kaprekar::; link::Classes/Array#-pea::, link::Classes/Array#-sieve::, link::Classes/Array#-symGroup::, link::Classes/Array#-symPerm::, link::Classes/Integer#-circPerm::, link::Classes/Integer#-collatz::, link::Classes/Integer#-euclidean::, link::Classes/Integer#-kaprekar::; link::Classes/Integer#-pea::, link::Classes/Number#-lorenz::.
+Cycle includes the methods link::Classes/Array#-circPerm::, link::Classes/Array#-interlace::, link::Classes/Array#-kaprekar::, link::Classes/Array#-kreuzspiel::, link::Classes/Array#-pea::, link::Classes/Array#-sieve::, link::Classes/Array#-symGroup::, link::Classes/Array#-symPerm::, link::Classes/Integer#-circPerm::, link::Classes/Integer#-collatz::, link::Classes/Integer#-euclidean::, link::Classes/Integer#-kaprekar::, link::Classes/Integer#-pea::, link::Classes/Number#-lorenz::.
 
 method:: circPerm
 
@@ -53,6 +53,9 @@ code::
 [1, 2, 3, 4].kaprekar.first; // the 'path'
 [1, 2, 3, 4].kaprekar.last;  // the cycle
 ::
+
+method:: kreuzspiel
+TODO
 
 method:: pea
 Primarily developed by John Conway, the pea pattern is a variation of a 'look-and-say' sequence by counting the elements of a seed from the lowest number to the highest iteratively until the effectiveness of a cycle.

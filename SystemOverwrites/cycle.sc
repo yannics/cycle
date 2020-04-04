@@ -2,24 +2,25 @@
 cycle
 version 1.0.1
 See also <https://github.com/yannics/cl-cycle>
----------------------------------
+----------------------------------
 To install: clone or copy this folder to Platform.userExtensionDir
----------------------------------
-  Method    |   Class(es)
-------------|--------------------
-+ kaprekar  | + Array / + Integer   ---> 1637.kaprekar(8)
-  sieve     | + Array
-+ pea       | + Array / + Integer   ---> 1.pea
-  symGroup  | + Array
-+ symPerm   | + Array               ---> [1,3,2,4].symPerm([2,4,3,1])
-+ cirPerm   | + Array / + Integer   ---> 1637.circPerm(10,2)
-+ lorenz    | + Number              ---> 0.234.lorenz(2)
-+ collatz   | + Integer             ---> 1637.collatz
-+ interlace | + Array               ---> [(1..4),(1..8),(1..3)].interlace
-+ euclidean | + Integer             ---> 5.euclidean(13,true)
-------------|--------------------
-+ pattern   | + Array
----------------------------------
+----------------------------------
+  Method     |   Class(es)
+-------------|--------------------
++ kaprekar   | + Array / + Integer   ---> 1637.kaprekar(8)
+  sieve      | + Array
++ pea        | + Array / + Integer   ---> 1.pea
+  symGroup   | + Array
++ symPerm    | + Array               ---> [1,3,2,4].symPerm([2,4,3,1])
++ cirPerm    | + Array / + Integer   ---> 1637.circPerm(10,2)
+  kreuzspiel | + Array
++ lorenz     | + Number              ---> 0.234.lorenz(2)
++ collatz    | + Integer             ---> 1637.collatz
++ interlace  | + Array               ---> [(1..4),(1..8),(1..3)].interlace
++ euclidean  | + Integer             ---> 5.euclidean(13,true)
+-------------|--------------------
++ pattern    | + Array
+----------------------------------
 <by.cmsc@gmail.com>
 */
 
@@ -30,6 +31,10 @@ To install: clone or copy this folder to Platform.userExtensionDir
 	}
 
 	symGroup {
+		"Not yet implemented.".error; ^nil
+	}
+
+	kreuzspiel {
 		"Not yet implemented.".error; ^nil
 	}
 
