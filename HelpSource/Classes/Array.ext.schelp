@@ -4,7 +4,7 @@ private:: asCycle
 private:: isEqual
 
 subsection:: Cycle
-Cycle includes the methods link::Classes/Array#-circPerm::, link::Classes/Array#-interlace::, link::Classes/Array#-kaprekar::, link::Classes/Array#-kreuzspiel::, link::Classes/Array#-pea::, link::Classes/Array#-sieve::, link::Classes/Array#-symGroup::, link::Classes/Array#-symPerm::, link::Classes/Integer#-circPerm::, link::Classes/Integer#-collatz::, link::Classes/Integer#-euclidean::, link::Classes/Integer#-kaprekar::, link::Classes/Integer#-pea::, link::Classes/Number#-lorenz::.
+Cycle includes the methods link::Classes/Array#-circPerm::, link::Classes/Array#-interlace::, link::Classes/Array#-kaprekar::, link::Classes/Array#-kreuzspiel::, link::Classes/Array#-pea::, link::Classes/Array#-sieve::, link::Classes/Array#-symGroup::, link::Classes/Array#-symPerm::, link::Classes/Integer#-circPerm::, link::Classes/Integer#-collatz::, link::Classes/Integer#-euclidean::, link::Classes/Integer#-kaprekar::, link::Classes/Integer#-pea::, link::Classes/Number#-lorenz::, link::Classes/Env#-collatz::.
 
 method:: circPerm
 
@@ -15,15 +15,11 @@ initial base
 argument:: cBase
 circular base
 
-returns:: an array with the cycle as a circular permutation according to the radix as arguments.
+returns:: the cycle as a circular permutation according to the radix as arguments.
 
 discussion::
 code::
 [1, 2, 3, 4].circPerm(10, 2);
-// the cycle
-[1, 2, 3, 4].circPerm(10, 2).first;
-// or
-[1, 2, 3, 4].circPerm(10, 2).last;
 ::
 
 method:: interlace
@@ -34,10 +30,6 @@ returns:: an array where each element groups the circular permutations of each a
 discussion::
 code::
 [(1..4), (1..8), (1..3)].interlace;
-// the cycle
-[(1..4), (1..8), (1..3)].interlace.first;
-// or
-[(1..4), (1..8), (1..3)].interlace.last;
 ::
 
 method:: kaprekar
@@ -50,8 +42,8 @@ returns:: an array with the cycle itself prepended by its 'path' if it exists.
 discussion::
 code::
 [1, 2, 3, 4].kaprekar;
-[1, 2, 3, 4].kaprekar.first; // the 'path'
-[1, 2, 3, 4].kaprekar.last;  // the cycle
+[1, 2, 3, 4].kaprekar.path;
+[1, 2, 3, 4].kaprekar.cycle;
 ::
 
 method:: kreuzspiel
@@ -60,13 +52,13 @@ TODO
 method:: pea
 Primarily developed by John Conway, the pea pattern is a variation of a 'look-and-say' sequence by counting the elements of a seed from the lowest number to the highest iteratively until the effectiveness of a cycle.
 
-returns:: an array with the cycle itself prepended by its 'path' if it exists.
+returns:: The cycle itself prepended by its 'path' if it exists.
 
 discussion::
 code::
 [1, 2, 3, 4].pea;
-[1, 2, 3, 4].pea.first; // the 'path'
-[1, 2, 3, 4].pea.last;  // the cycle
+[1, 2, 3, 4].pea.path;
+[1, 2, 3, 4].pea.cycle;
 ::
 
 method:: sieve
@@ -81,13 +73,9 @@ Highlighted by Olivier Messiaen, symmetric permutations constitute a system of n
 argument:: arrayCode
 allow to re-order durations
 
-returns:: an array with the cycle as a symmetric permutation according to an re-ordered array as arguments.
+returns:: the cycle as a symmetric permutation according to an re-ordered array as arguments.
 
 discussion::
 code::
 [3, 1, 2, 2].symPerm([3, 1, 4, 2]);
-// the cycle
-[3, 1, 2, 2].symPerm([3, 1, 4, 2]).first;
-// or
-[3, 1, 2, 2].symPerm([3, 1, 4, 2]).last;
 ::

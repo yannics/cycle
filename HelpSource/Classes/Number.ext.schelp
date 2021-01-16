@@ -1,7 +1,7 @@
 INSTANCEMETHODS::
 
 subsection:: Cycle
-Cycle includes the methods link::Classes/Array#-circPerm::, link::Classes/Array#-interlace::, link::Classes/Array#-kaprekar::, link::Classes/Array#-kreuzspiel::, link::Classes/Array#-pea::, link::Classes/Array#-sieve::, link::Classes/Array#-symGroup::, link::Classes/Array#-symPerm::, link::Classes/Integer#-circPerm::, link::Classes/Integer#-collatz::, link::Classes/Integer#-euclidean::, link::Classes/Integer#-kaprekar::, link::Classes/Integer#-pea::, link::Classes/Number#-lorenz::.
+Cycle includes the methods link::Classes/Array#-circPerm::, link::Classes/Array#-interlace::, link::Classes/Array#-kaprekar::, link::Classes/Array#-kreuzspiel::, link::Classes/Array#-pea::, link::Classes/Array#-sieve::, link::Classes/Array#-symGroup::, link::Classes/Array#-symPerm::, link::Classes/Integer#-circPerm::, link::Classes/Integer#-collatz::, link::Classes/Integer#-euclidean::, link::Classes/Integer#-kaprekar::, link::Classes/Integer#-pea::, link::Classes/Number#-lorenz::, link::Classes/Env#-collatz::.
 
 method:: lorenz
 In 1970, Birman, Guckenheimer, and Williams propose a model of dynamic discretization of Lorenz attractors, characterized by the periodicity of the orbits by a return to a point already crossed as a cycle.
@@ -19,11 +19,11 @@ Reference at https://www.chaos-math.org/en/chaos-vii-strange-attractors.html
 argument:: n
 round to multiple of n.
 
-returns:: an array with the cycle itself prepended by its 'path' if it exists.
+returns:: the cycle itself prepended by its 'path' if it exists.
 
 discussion::
 code::
 0.27.lorenz;
-0.27.lorenz.first; // the 'path'
-0.27.lorenz.last;  // the cycle
+0.27.lorenz.path;
+0.27.lorenz.cycle;
 ::

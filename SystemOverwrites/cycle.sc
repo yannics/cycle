@@ -1,6 +1,6 @@
 /*
 cycle
-version 1.0.1
+version 1.0.2
 See also <https://github.com/yannics/cl-cycle>
 ----------------------------------
 To install: clone or copy this folder to Platform.userExtensionDir
@@ -15,11 +15,9 @@ To install: clone or copy this folder to Platform.userExtensionDir
 + cirPerm    | + Array / + Integer   ---> 1637.circPerm(10,2)
   kreuzspiel | + Array
 + lorenz     | + Number              ---> 0.234.lorenz(2)
-+ collatz    | + Integer             ---> 1637.collatz
++ collatz    | + Integer / + Env     ---> 1637.collatz / Env.collatz(1637)
 + interlace  | + Array               ---> [(1..4),(1..8),(1..3)].interlace
 + euclidean  | + Integer             ---> 5.euclidean(13,true)
--------------|--------------------
-+ pattern    | + Array
 ----------------------------------
 <by.cmsc@gmail.com>
 */
@@ -55,7 +53,7 @@ To install: clone or copy this folder to Platform.userExtensionDir
 		};
 		if(arrayCode.isArray && (this.size==arrayCode.size) && (ac.sort[0]==1) && ac.sort.isSeries(1),
 			{ tmp = rec.(this, arrayCode, res);
-				^tmp.asCycle },
+				^tmp },
 			{ "symPerm argument requires a scrambled series from 1 to the size of the symPerm array.".error; ^nil })
 	}
 
@@ -70,7 +68,7 @@ To install: clone or copy this folder to Platform.userExtensionDir
 			var mx = len.lcm(len.maxItem).maxItem;
 			var al=len.collect{|it|mx/it}.asInteger;
 			var tmp=[this,len,al].flop.collect{|it|it[0].wrapExtend(it[1]*it[2])}.flop;
-			^tmp.asCycle
+			^tmp
 		}
 		{
 			"interlace array requires only arrays".error; ^nil
@@ -119,7 +117,7 @@ To install: clone or copy this folder to Platform.userExtensionDir
 		};
 		if(this.alwaysInteger(0),
 			{ tmp = rec.(this.toBase(iBase, cBase), cBase, res);
-				^tmp.collect{|it| it.toBase(cBase, iBase, n)}.asCycle },
+				^tmp.collect{|it| it.toBase(cBase, iBase, n)} },
 			{ "circPerm array requires only positive integer".error })
 	}
 
@@ -177,6 +175,14 @@ To install: clone or copy this folder to Platform.userExtensionDir
 		^res.reject{|i| i.isEmpty}
 	}
 
+	cycle {
+		^this.asCycle.first;
+	}
+
+	path {
+		^this.asCycle.last;
+	}
+
 	asIndex { | al |
 		var depth=this.maxDepth;
 		if (this.flat.alwaysInteger(0) && (this.flat.maxItem<al.size))
@@ -185,20 +191,6 @@ To install: clone or copy this folder to Platform.userExtensionDir
 		}
 		{
 			"The content of the array cannot be the indices of al".error; ^nil;
-		}
-	}
-
-	pattern { | n=inf, flat, onlyCycle |
-		var tmp;
-		var wp=if(onlyCycle.asBoolean){0}{1};
-		if(flat.asBoolean)
-		{
-			tmp = Pseq([Pseq(this[0].flat, wp), Pseq(this.last.flat, n)]);
-			^tmp
-		}
-		{
-			tmp = Pseq([Pseq(this[0], wp), Pseq(this.last, n)]);
-			^tmp
 		}
 	}
 
@@ -255,7 +247,7 @@ To install: clone or copy this folder to Platform.userExtensionDir
 				}
 			)};
 		tmp = rec.(this, res, 1);
-		^tmp.asCycle
+		^tmp
 	}
 
 	euclidean { | n, ratio |
@@ -284,7 +276,7 @@ To install: clone or copy this folder to Platform.userExtensionDir
 		)};
 		if(n.isInteger && (this>0) && (n>=this))
 		{
-			tmp = [rec.(this, n, nil, nil, ratio)];
+			tmp = rec.(this, n, nil, nil, ratio);
 			^tmp
 		}
 		{
@@ -323,6 +315,33 @@ To install: clone or copy this folder to Platform.userExtensionDir
 		}{
 			"lorenz requires a number between 0 and 1".error; ^this;
 		}
+	}
+
+}
+
++ Env {
+
+	*collatz { | n, dur=1, normX=0, normY=\max |
+		var col, env, levels, times;
+		col = n.collatz ++ 0;
+		if (normY == \freq)
+		{
+			col=col/n
+		};
+		if (normY == \max)
+		{
+			col=col/col.maxItem
+		};
+		levels = col ++ 0;
+		if (normX > (col.size))
+		{
+			times = (dur/normX)!(col.size-1) ++ (dur - ((dur/normX)*(col.size-1)));
+		}
+		{
+			times = (dur/col.size)!(col.size-1);
+		};
+		env = this.new(levels, times);
+		^env;
 	}
 
 }

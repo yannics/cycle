@@ -1,7 +1,7 @@
 INSTANCEMETHODS::
 
 subsection:: Cycle
-Cycle includes the methods link::Classes/Array#-circPerm::, link::Classes/Array#-interlace::, link::Classes/Array#-kaprekar::, link::Classes/Array#-kreuzspiel::, link::Classes/Array#-pea::, link::Classes/Array#-sieve::, link::Classes/Array#-symGroup::, link::Classes/Array#-symPerm::, link::Classes/Integer#-circPerm::, link::Classes/Integer#-collatz::, link::Classes/Integer#-euclidean::, link::Classes/Integer#-kaprekar::, link::Classes/Integer#-pea::, link::Classes/Number#-lorenz::.
+Cycle includes the methods link::Classes/Array#-circPerm::, link::Classes/Array#-interlace::, link::Classes/Array#-kaprekar::, link::Classes/Array#-kreuzspiel::, link::Classes/Array#-pea::, link::Classes/Array#-sieve::, link::Classes/Array#-symGroup::, link::Classes/Array#-symPerm::, link::Classes/Integer#-circPerm::, link::Classes/Integer#-collatz::, link::Classes/Integer#-euclidean::, link::Classes/Integer#-kaprekar::, link::Classes/Integer#-pea::, link::Classes/Number#-lorenz::, link::Classes/Env#-collatz::.
 
 method:: circPerm
 
@@ -10,16 +10,12 @@ in/out base
 argument:: cBase
 circular base
 
-returns:: an array with the cycle as a circular permutation according to the radix as arguments.
+returns:: the cycle as a circular permutation according to the radix as arguments.
 
 discussion::
 See also link::Classes/Array#-circPerm::.
 code::
 1234.circPerm(10, 2);
-// the cycle
-1234.circPerm(10, 2).first;
-// or
-1234.circPerm(10, 2).last;
 ::
 
 method:: collatz
@@ -31,13 +27,11 @@ if x(n) is odd, then x(n+1) is equal to 1 plus x(n) multiplied by 3.
 
 The series thus constructed always ends – until the contrary is proved – by a trivial cycle (4 2 1) for positive integers. This hypothesis is called Syracuse conjecture.
 
-returns:: an array with the cycle itself prepended by its 'path' if it exists.
+returns:: the 'path' if it exists until the cycle itself.
 
 discussion::
 code::
 1234.collatz;
-1234.collatz.first; // the 'path'
-1234.collatz.last;  // the cycle
 ::
 
 method:: euclidean
@@ -57,10 +51,6 @@ discussion::
 code::
 5.euclidean(8);
 5.euclidean(8, true);
-// the cycle
-5.euclidean(8).first;
-// or
-5.euclidean(8).last;
 ::
 
 method:: kaprekar
@@ -74,23 +64,23 @@ The process is iterated until a cyclic redundancy.
 
 argument:: base
 
-returns:: an array with the cycle itself prepended by its 'path' if it exists.
+returns:: the cycle itself prepended by its 'path' if it exists.
 
 discussion::
 code::
 1234.kaprekar;
-1234.kaprekar.first; // the 'path'
-1234.kaprekar.last;  // the cycle
+1234.kaprekar.path;
+1234.kaprekar.cycle;
 ::
 
 method:: pea
 Apply the method link::Classes/Array#-pea:: to a single positive integer.
 
-returns:: an array with the cycle itself prepended by its 'path' if it exists.
+returns:: cycle itself prepended by its 'path' if it exists.
 
 discussion::
 code::
 1.pea;
-1.pea.first; // the 'path'
-1.pea.last;  // the cycle
+1.pea.path;
+1.pea.cycle;
 ::

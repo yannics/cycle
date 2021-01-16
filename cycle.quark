@@ -1,10 +1,10 @@
 (
   name: "cycle",
   summary: "A collection of method about cyclicity for SuperCollider",
-  version: "1.0.1",
+  version: "1.0.2",
   schelp: "cycle",
   url: "https://github.com/yannics/cycle",
   dependencies: [],
   license: "GPL",
-  copyleft: "Yann Ics, 2020"
+  copyleft: "Yann Ics, 2021"
   )
