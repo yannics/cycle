@@ -335,7 +335,7 @@ version 1.0.3
 
 	*collatz { | n, dur=1, normX=0, normY=\max |
 		var col, env, levels, times;
-		col = n.collatz ++ 0;
+		col = n.collatz.seq ++ 0;
 		if (normY == \freq)
 		{
 			col=col/n

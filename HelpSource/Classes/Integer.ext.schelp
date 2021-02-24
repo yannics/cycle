@@ -34,6 +34,9 @@ returns:: the 'path' if it exists until the cycle itself.
 discussion::
 code::
 1234.collatz;
+1234.collatz.seq;
+1234.collatz.path;
+1234.collatz.cycle;
 ::
 
 method:: euclidean
