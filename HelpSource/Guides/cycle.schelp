@@ -8,7 +8,7 @@ EMPHASIS::Briefly, this is some prospecting tools that fit in a heuristic perspe
 
 STRONG::Result typology::
 table::
-## [ path, cycle ] or [ cycle ]footnote::This is the default result. The following class methods return respectively path (if it exists) ++ cycle with the method TELETYPE::.seq::, only the path (if it exists) with the method TELETYPE::.path::, and the cycle itself with the method TELETYPE::.cycle::
+## [ path, cycle ] or [ cycle ]footnote::This is the default result. The following methods return respectively path (if it exists) ++ cycle with the method TELETYPE::.seq::, only the path (if it exists) with the method TELETYPE::.path::, and the cycle itself with the method TELETYPE::.cycle::
 ::
 || cycle || array of cycle(s)
     ##
@@ -21,7 +21,7 @@ link::Classes/Integer#-circPerm::, link::Classes/Integer#-euclidean::
 link::Classes/Array#-sieve::, link::Classes/Array#-symGroup::
 ::
 
-STRONG::Class typology::
+STRONG::Method typology::
 
 definitionlist::
      ## Array
