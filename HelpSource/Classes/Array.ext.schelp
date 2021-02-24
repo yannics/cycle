@@ -1,9 +1,17 @@
 INSTANCEMETHODS::
 
 private:: asCycle
+private:: asIndex
 private:: isEqual
+private:: isSingleton
+private:: alwaysInteger
+private:: alwaysArray
+private:: toBase
+private:: butlast
 
 subsection:: Cycle
+Browse Math/Cycle
+
 Cycle includes the methods link::Classes/Array#-circPerm::, link::Classes/Array#-interlace::, link::Classes/Array#-kaprekar::, link::Classes/Array#-kreuzspiel::, link::Classes/Array#-pea::, link::Classes/Array#-sieve::, link::Classes/Array#-symGroup::, link::Classes/Array#-symPerm::, link::Classes/Integer#-circPerm::, link::Classes/Integer#-collatz::, link::Classes/Integer#-euclidean::, link::Classes/Integer#-kaprekar::, link::Classes/Integer#-pea::, link::Classes/Number#-lorenz::, link::Classes/Env#-collatz::.
 
 method:: circPerm
@@ -42,6 +50,7 @@ returns:: an array with the cycle itself prepended by its 'path' if it exists.
 discussion::
 code::
 [1, 2, 3, 4].kaprekar;
+[1, 2, 3, 4].kaprekar.seq;
 [1, 2, 3, 4].kaprekar.path;
 [1, 2, 3, 4].kaprekar.cycle;
 ::
@@ -57,6 +66,7 @@ returns:: The cycle itself prepended by its 'path' if it exists.
 discussion::
 code::
 [1, 2, 3, 4].pea;
+[1, 2, 3, 4].pea.seq;
 [1, 2, 3, 4].pea.path;
 [1, 2, 3, 4].pea.cycle;
 ::

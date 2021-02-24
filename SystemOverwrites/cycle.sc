@@ -1,9 +1,6 @@
 /*
-cycle
-version 1.0.2
-See also <https://github.com/yannics/cl-cycle>
-----------------------------------
-To install: clone or copy this folder to Platform.userExtensionDir
+Cycle
+version 1.0.3
 ----------------------------------
   Method     |   Class(es)
 -------------|--------------------
@@ -169,18 +166,33 @@ To install: clone or copy this folder to Platform.userExtensionDir
 		^this.every { |x| x.isArray };
 	}
 
+	butlast {
+		var res = this[0..this.size-1];
+		^res
+	}
+
+	isSingleton {
+		if(this.size == 1) {^true} {^false}
+	}
+
 	asCycle {
 		var a, b, c, i, res;
 		a=this.asArray;b=[];i=0;while({(a[i]!=a.last) && (i<a.size)},{b=b.add(a[i]);i=i+1});res=[b,a.copyRange(i, a.size-2)];
 		^res.reject{|i| i.isEmpty}
 	}
 
+	seq {
+		^this.flatten(1).butlast;
+	}
+
 	cycle {
-		^this.asCycle.first;
+		^this.last;
 	}
 
 	path {
-		^this.asCycle.last;
+		if(this.isSingleton.not)
+		{ ^this.first }
+		{ ^nil }
 	}
 
 	asIndex { | al |
@@ -247,7 +259,7 @@ To install: clone or copy this folder to Platform.userExtensionDir
 				}
 			)};
 		tmp = rec.(this, res, 1);
-		^tmp
+		^tmp.asCycle
 	}
 
 	euclidean { | n, ratio |
