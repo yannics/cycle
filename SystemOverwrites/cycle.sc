@@ -1,6 +1,6 @@
 /*
 Cycle
-version 1.0.3
+version 1.0.4
 ----------------------------------
   Method     |   Class(es)
 -------------|--------------------
@@ -50,7 +50,7 @@ version 1.0.3
 		};
 		if(arrayCode.isArray && (this.size==arrayCode.size) && (ac.sort[0]==1) && ac.sort.isSeries(1),
 			{ tmp = rec.(this, arrayCode, res);
-				^tmp },
+				^tmp.butlast },
 			{ "symPerm argument requires a scrambled series from 1 to the size of the symPerm array.".error; ^nil })
 	}
 
@@ -114,7 +114,7 @@ version 1.0.3
 		};
 		if(this.alwaysInteger(0),
 			{ tmp = rec.(this.toBase(iBase, cBase), cBase, res);
-				^tmp.collect{|it| it.toBase(cBase, iBase, n)} },
+				^tmp.collect{|it| it.toBase(cBase, iBase, n)}.butlast },
 			{ "circPerm array requires only positive integer".error })
 	}
 
@@ -164,6 +164,11 @@ version 1.0.3
 
 	alwaysArray {
 		^this.every { |x| x.isArray };
+	}
+
+	butlast {
+		var res = this[0..this.size-2];
+		^res
 	}
 
 	isSingleton {
@@ -217,7 +222,7 @@ version 1.0.3
 	circPerm { | iBase=10, cBase=2 |
 		if(this.isPositive)
 		{
-			^this.asDigits(iBase).circPerm(iBase,cBase).collect{|it| it.collect{|itt| itt.convertDigits(iBase)}}
+			^this.asDigits(iBase).circPerm(iBase, cBase).collect{|it| it.convertDigits(iBase)}
 		}{
 			"only for positive integer".error; ^nil
 		}

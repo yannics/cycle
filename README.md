@@ -2,7 +2,7 @@
 
 Cycle generator for SuperCollider
 
-**version 1.0.3**
+**version 1.0.4**
 
 To install: clone or copy this folder to `Platform.userExtensionDir`
 

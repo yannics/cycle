@@ -1,7 +1,7 @@
 (
   name: "cycle",
   summary: "A collection of method about cyclicity for SuperCollider",
-  version: "1.0.3",
+  version: "1.0.4",
   schelp: "cycle",
   url: "https://github.com/yannics/cycle",
   dependencies: [],

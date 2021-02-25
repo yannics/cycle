@@ -7,6 +7,7 @@ private:: isSingleton
 private:: alwaysInteger
 private:: alwaysArray
 private:: toBase
+private:: butlast
 
 subsection:: Cycle
 Browse Math/Cycle
