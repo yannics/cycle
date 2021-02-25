@@ -166,11 +166,6 @@ version 1.0.3
 		^this.every { |x| x.isArray };
 	}
 
-	butlast {
-		var res = this[0..this.size-1];
-		^res
-	}
-
 	isSingleton {
 		if(this.size == 1) {^true} {^false}
 	}
@@ -182,7 +177,7 @@ version 1.0.3
 	}
 
 	seq {
-		^this.flatten(1).butlast;
+		^this.flatten(1);
 	}
 
 	cycle {
