@@ -12,6 +12,6 @@ or evaluate
 
 ### TODO
 
-Class methods `.sieve`, `.symGroup` and `.kreuzspiel`
+The methods `.sieve`, `.symGroup` and `.kreuzspiel`
 
 Reference: <https://github.com/yannics/cl-cycle>
