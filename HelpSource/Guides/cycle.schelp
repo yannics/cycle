@@ -31,5 +31,5 @@ definitionlist::
      ## Number
      || link::Classes/Number#-lorenz::
      ## Env
-     || link::Classes/Env#-collatz::
+     || link::Classes/Env#*collatz::
 ::
