@@ -9,10 +9,41 @@ private:: alwaysArray
 private:: toBase
 private:: butlast
 
+private:: placecriblemat
+private:: decallcriblemat
+private:: cyx
+
 subsection:: Cycle
 Browse Math/Cycle
 
-Cycle includes the methods link::Classes/Array#-circPerm::, link::Classes/Array#-interlace::, link::Classes/Array#-kaprekar::, link::Classes/Array#-kreuzspiel::, link::Classes/Array#-pea::, link::Classes/Array#-sieve::, link::Classes/Array#-symGroup::, link::Classes/Array#-symPerm::, link::Classes/Integer#-circPerm::, link::Classes/Integer#-collatz::, link::Classes/Integer#-euclidean::, link::Classes/Integer#-kaprekar::, link::Classes/Integer#-pea::, link::Classes/Number#-lorenz::, link::Classes/Env#*collatz::.
+Cycle includes the methods link::Classes/Array#-campanology::, link::Classes/Array#-circPerm::, link::Classes/Array#-interlace::, link::Classes/Array#-kaprekar::, link::Classes/Array#-kreuzspiel::, link::Classes/Array#-pea::, link::Classes/Array#-sieve::, link::Classes/Array#-symGroup::, link::Classes/Array#-symPerm::, link::Classes/Integer#-campanology::,link::Classes/Integer#-circPerm::, link::Classes/Integer#-collatz::, link::Classes/Integer#-euclidean::, link::Classes/Integer#-kaprekar::, link::Classes/Integer#-pea::, link::Classes/Number#-lorenz::, link::Classes/Env#*collatz::.
+
+method:: campanology
+
+As a musical study of bells, campanology focuses on the ringing methods according to the two following rules:
+NUMBEREDLIST::
+## Each bell sounds exactly once in each row.
+## In any change, each bell can move at most one position.
+::
+
+The algorithm provides a trivial solution – called the 'hunting group' – by permuting consecutive pairs and alternating the starting position between the first and the second position.
+
+STRONG::Reference::: White, A., & Wilson, R. (1995). The Hunting Group. EMPHASIS::The Mathematical Gazette::, 79(484), 5–16. https://doi.org/10.2307/3619985
+
+argument:: mode
+assigns the first switched couple as indices either 0 or 1.
+
+argument:: rev
+Boolean, stops the algorithm when its input is reversed.
+
+returns:: the cycle itself.
+
+discussion::
+code::
+[1, 2, 3, 4].campanology;
+[1, 2, 3, 4].campanology(1);
+[1, 2, 3, 4].campanology(rev:true);
+::
 
 method:: circPerm
 
@@ -56,7 +87,22 @@ code::
 ::
 
 method:: kreuzspiel
-TODO
+In 1951, Karlheinz Stockhausen wrotes EMPHASIS::Kreuzspiel:: (EMPHASIS::« Jeux croisés »::) which uses the crossing technique inspired by Olivier Messiaen called EMPHASIS::« des extrêmes au centre »:: as a kind of retrogradation en éventail. This consists to take the first and the last values of a sequence and places them in the middle (or optionally at a given indexed place) by opposite crossing.
+
+Reference at http://hdl.handle.net/1773/23571
+
+argument:: ind
+as indice, code::(this.size/2).floor:: by default.
+
+
+returns::
+The cycle itself.
+
+discussion::
+code::
+[1, 2, 3, 4].kreuzspiel;
+[1, 2, 3, 4].kreuzspiel(1);
+::
 
 method:: pea
 Primarily developed by John Conway, the pea pattern is a variation of a 'look-and-say' sequence by counting the elements of a seed from the lowest number to the highest iteratively until the effectiveness of a cycle.
@@ -72,16 +118,66 @@ code::
 ::
 
 method:: sieve
-TODO
+Kind of EMPHASIS::Metabole:: according to Iannis Xenakis, rhythmic sieves rely on the construction of a matrix to generate two cycles: one by horizontal shift and one by vertical shift.
+
+For instance, with code::i = 4:: and code::j = 5::, the shifting cycle is done according to the following matrix:
+table::
+##     || EMPHASIS:: 0:: || EMPHASIS:: 1:: || EMPHASIS:: 2:: || EMPHASIS:: 3::
+## EMPHASIS::0:: || SOFT:: 0:: || SOFT:: 5:: || SOFT::10:: || SOFT::15::
+## EMPHASIS::1:: || SOFT::16:: || SOFT:: 1:: || SOFT:: 6:: || SOFT::11::
+## EMPHASIS::2:: || SOFT::12:: || SOFT::17:: || SOFT:: 2:: || SOFT:: 7::
+## EMPHASIS::3:: || SOFT:: 8:: || SOFT::13:: || SOFT::18:: || SOFT:: 3::
+## EMPHASIS::4:: || SOFT:: 4:: || SOFT:: 9:: || SOFT::14:: || SOFT::19::
+::
+
+NOTE::
+by convention, CODE::i:: should be strictly inferior to CODE::j::.
+Also, this kind of matrix requires CODE::i.gcd(j) == 1::.
+::
+
+argument:: field
+set the maximum value of the matrix, CODE::this.maxItem:: by default.
+
+argument:: i
+as the x-axis of the matrix.
+
+argument:: j
+as the y-axis of the matrix.
+
+argument:: optimize
+requires one of the following symbols:
+table::
+## CODE::\no:: || CODE::\n:: || nearest solution of CODE::this.maxItem:: or CODE::field:: if set
+## CODE::\yes:: || CODE::\y:: ||  look for the next solution in order to minimize CODE::(i-j).abs::
+## CODE::\field:: || CODE::\f:: || look for the minimal CODE::(i-j).abs:: between CODE::this.maxItem:: and  CODE::field::
+::
+
+returns:: an array of two cycles.
+
+discussion::
+code::
+[2, 11, 7, 12, 8, 14].sieve;
+[2, 11, 7, 12, 8, 14].sieve(field: 52, optimize: 'field');
+::
 
 method:: symGroup
-TODO
+The symmetric group allows to enumerate all cycles from a list of EMPHASIS::n:: elements according to their respective position of the same ordered list (i.e. { 1, 2, ..., EMPHASIS::n:: }) such as each set is a group of permutations as a bijective maps.
+
+argument:: ref
+allows to apply the algorithm on any kind of elements provided that CODE::(this.asBag == ref.asBag)::.
+
+returns:: a list of cycles.
+
+discussion::
+code::
+[3, 10, 2, 4, 7, 9, 8, 5, 6, 1].symGroup;
+::
 
 method:: symPerm
 Highlighted by Olivier Messiaen, symmetric permutations constitute a system of numbered durations that consists in changing the order of its durations in order to obtain a limited number of rhythmic cells.
 
 argument:: arrayCode
-allow to re-order durations
+allows to re-order durations
 
 returns:: the cycle as a symmetric permutation according to an re-ordered array as arguments.
 

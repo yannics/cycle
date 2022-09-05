@@ -15,7 +15,8 @@ table::
 link::Classes/Array#-kaprekar::, link::Classes/Array#-pea::,
 link::Classes/Integer#-kaprekar::, link::Classes/Integer#-pea::, link::Classes/Integer#-collatz::, link::Classes/Number#-lorenz::
 ||
-link::Classes/Array#-circPerm::, link::Classes/Array#-interlace::, link::Classes/Array#-kreuzspiel::, link::Classes/Array#-symPerm::,
+link::Classes/Array#-campanology::, link::Classes/Array#-circPerm::, link::Classes/Array#-interlace::, link::Classes/Array#-kreuzspiel::, link::Classes/Array#-symPerm::,
+link::Classes/Integer#-campanology::,
 link::Classes/Integer#-circPerm::, link::Classes/Integer#-euclidean::
 ||
 link::Classes/Array#-sieve::, link::Classes/Array#-symGroup::
@@ -25,9 +26,9 @@ SECTION::Method typology
 
 definitionlist::
      ## Array
-     || link::Classes/Array#-circPerm::, link::Classes/Array#-interlace::, link::Classes/Array#-kaprekar::, link::Classes/Array#-kreuzspiel::, link::Classes/Array#-pea::, link::Classes/Array#-sieve::, link::Classes/Array#-symGroup::, link::Classes/Array#-symPerm::
+     || link::Classes/Array#-campanology::, link::Classes/Array#-circPerm::, link::Classes/Array#-interlace::, link::Classes/Array#-kaprekar::, link::Classes/Array#-kreuzspiel::, link::Classes/Array#-pea::, link::Classes/Array#-sieve::, link::Classes/Array#-symGroup::, link::Classes/Array#-symPerm::
      ## Integer
-     || link::Classes/Integer#-circPerm::, link::Classes/Integer#-collatz::, link::Classes/Integer#-euclidean::, link::Classes/Integer#-kaprekar::, link::Classes/Integer#-pea::
+     || link::Classes/Integer#-campanology::, link::Classes/Integer#-circPerm::, link::Classes/Integer#-collatz::, link::Classes/Integer#-euclidean::, link::Classes/Integer#-kaprekar::, link::Classes/Integer#-pea::
      ## Number
      || link::Classes/Number#-lorenz::
      ## Env
