@@ -21,7 +21,6 @@ version 1.0.5
 */
 
 + Array {
-
 	//-------------------------------------
 	placecriblemat {
 		|i,j|
@@ -48,11 +47,11 @@ version 1.0.5
 			}
 		};
 		if (ij.notNil)
-		{if(ij.product > this.maxItem){ ^[cy.(this,ij),cy.(this,ij.reverse)] }}
+		{if(ij.product > this.maxItem) { ^[cy.(this,ij),cy.(this,ij.reverse)] }}
 	}
 	//-------------------------------------
 	sieve {
-		|field,i,j,optimize=\no|
+		|field, i, j, optimize=\no|
 		var a = this.maxItem+1;
 		var k = if (i.asBoolean.xor(j.asBoolean)) {if(i.notNil){i}{j}};
 		var f = if (field.isNumber) {field} {a};
@@ -81,7 +80,7 @@ version 1.0.5
 		{
 			if ((optimize == \field) || (optimize == \f))
 			{ ^this.cyx(a.infx(field, k)) }
-			{if (k.iorjmoins(f).asBoolean) { ^this.cyx(k.iorjmoins(f)) }}
+			{if (k.iorjmoins(f).notNil) { ^this.cyx(k.iorjmoins(f)) }}
 		}
 	}
 
@@ -538,6 +537,7 @@ version 1.0.5
 		{key == \plusyes} { ^this.optplus }
 		{key == \moinsno} {if (this.voirX.isNil) { ^(this-1).iandj1 } { ^this.iandj1 }}
 		{key == \moinsyes} { ^this.optmoins }
+		{true} {^nil}
 	}
 
 	iorj1 {
@@ -547,9 +547,11 @@ version 1.0.5
 			if (0 == x.mod(this))
 			{
 				if (1 == this.gcd((x/this).asInteger))
-				{[this, (x/this).asInteger]}
+				{^[this, (x/this).asInteger]} { ^nil }
 			}
+			{ ^nil }
 		}
+		{ ^nil }
 	}
 
 	iorjplus {
@@ -560,23 +562,24 @@ version 1.0.5
 			{
 				if (1 == this.gcd((x/this).asInteger))
 				{ ^[this, (x/this).asInteger].sort }
-				{this.iorjplus(x+1)}
+				{^this.iorjplus(x+1)}
 			}
-			{this.iorjplus(x+1)}
+			{^this.iorjplus(x+1)}
 		}
+		{^nil}
 	}
 
 	iorjmoins {
-		|k,x|
+		|x|
 		if (x > (2*this))
 		{
 			if (0 == x.mod(this))
 			{
 				if (1 == this.gcd((x/this).asInteger))
 				{ ^[this, (x/this).asInteger].sort }
-				{this.iorjmoins(x-1)}
+				{^this.iorjmoins(x-1)}
 			}
-			{this.iorjmoins(x-1)}
+			{^this.iorjmoins(x-1)}
 		}
 	}
 
