@@ -2,6 +2,8 @@ TITLE:: Cycle
 categories:: Math
 summary:: Cycle generator
 
+image::1234.png#Moebius Strip II M.C. Escher 1963::
+
 This is a collection of algorithms generating cycle from numbers or numeric sequences, in order to explore this research field in a musical context, as some composers did in their respective works such as Olivier Messiaen with its symmetrical permutations, also Gérard Grisey or Jean Barraqué, and Iannis Xenakis with its EMPHASIS::cribles rythmiques::.
 
 EMPHASIS::Briefly, this is some prospecting tools that fit in a heuristic perspective, intended to serve as a musical discourse, according to the theme of cyclicity. Thus, it is possible to consider the construction of musical representations of mathematical ideas, recognizing that musical experience can not be reduced to a symbolic system. In other words, it must be possible to report an association between network composition, performance and listening ...::
