@@ -1,6 +1,6 @@
 /*
 Cycle
-version 1.0.5
+version 1.0.6
 -----------------------------------
   Method      |   Class(es)
 --------------|--------------------
@@ -15,7 +15,7 @@ version 1.0.5
 + collatz     | + Integer / + Env     ---> 1637.collatz / Env.collatz(1637)
 + interlace   | + Array               ---> [(1..4),(1..8),(1..3)].interlace
 + euclidean   | + Integer             ---> 5.euclidean(13,true)
-+ campanology | + Array               ---> [1,2,3,4].campanology(1)
++ campanology | + Array               ---> [1,2,3,4].campanology
 ----------------------------------
 <by.cmsc@gmail.com>
 */
@@ -85,7 +85,6 @@ version 1.0.5
 	}
 
 	symGroup {
-		|ref|
 		var in, al;
 		var tolist = { |ar| [Array.series(ar.size, 1),ar].flop };
 		var boucle = {
@@ -114,53 +113,61 @@ version 1.0.5
 			{ res }
 			{ cfp.(remassoc.(boucle.(ar), ar), res) }
 		};
-		//-----------
-		if ((ref.notNil) && (ref.asArray.asBag == this.asBag))
-		{
-			al = [Array.series(ref.asArray.size, 1), ref.asArray].flop;
-			in = this.collect{|it| al.detect{|itt| itt[1] == it}}.collect(_[0]);
-			^cfp.(tolist.(in)).collect{|a| a.collect{|it| al.detect{|itt| itt[0] == it}}.collect(_[1])}
-		}
-		//-----------
-		{
-			if ((ref.isNil) && (difference(this, (1..this.size)).isEmpty))
-			{ ^cfp.(tolist.(this)) }
-			{ "Wrong array input!".error; ^nil }
-		}
+		if (difference(this, (1..this.size)).isEmpty)
+		{ ^cfp.(tolist.(this)) }
+		{ "Wrong array input!".error; ^nil }
 	}
 
-	campanology { |mode=0, rev=false|
-		//----------------
-		// code ref: https://scsynth.org/t/do-not-returning-array/6416/14
-		var size = this.size;
-		var swapConsequtiveIndexes = {|from, to|
-			(from..to).clump(2).collect{|p| p.reverse }.flat};
-		var indexesEven = swapConsequtiveIndexes.(0, size - 1);
-		var indexesOdd = [0] ++ swapConsequtiveIndexes.(1, size - 1);
-		var swappers = size.collect{ |n|
-			{|toSwap|
-				if
-				(
-					case
-					{mode==0} {n.odd}
-					{mode==1} {n.even}
-				)
-				{ indexesEven.collect{|i| toSwap[i]} }
-				{ indexesOdd.collect{|i| toSwap[i]} }
+	campanology { |mode=0, rev=false, sym=false|
+		if (sym && this.size.odd && (this.size>3))
+		{
+			var result = [this];
+			var size = (this.size/2).floor.asInteger;
+			var modmiror = {|mod,i| (i-(i*2+1)).mod(mod)};
+			// step0 (= starting point if mode=0)
+			var step0 = {var tmp=result.last.copy; (size-1).do{|i| if (i.even) {tmp=tmp.swap(i,i+1); tmp=tmp.swap(modmiror.(tmp.size,i), modmiror.(tmp.size,i+1))} }; if (size.odd) {tmp=tmp.swap(size-1,size+1)}; result=result.add(tmp)};
+			// step1 (= starting point if mode=1)
+			var step1 = {var tmp=result.last.copy; (size-1).do{|i| if (i.odd) {tmp=tmp.swap(i,i+1); tmp=tmp.swap(modmiror.(tmp.size,i), modmiror.(tmp.size,i+1))} }; if ((size-1).odd) {tmp=tmp.swap(size-1,size+1)}; result=result.add(tmp)};
+			case
+			{mode==0} {(size*2).collect{|i| if (i.even) {step0.()} {step1.()}}}
+			{mode==1} {(size*2).collect{|i| if (i.even) {step1.()} {step0.()}}};
+			if (rev)
+			{ ^result }
+			{ ^result ++ result.last.campanology(mode, true, true)[1..size*2-1] }
+		}
+		{
+			//----------------
+			// code ref: https://scsynth.org/t/do-not-returning-array/6416/14
+			var size = this.size;
+			var swapConsecutiveIndexes = {|from, to|
+				(from..to).clump(2).collect{|p| p.reverse }.flat};
+			var indexesEven = swapConsecutiveIndexes.(0, size - 1);
+			var indexesOdd = [0] ++ swapConsecutiveIndexes.(1, size - 1);
+			var swappers = size.collect{ |n|
+				{|toSwap|
+					if
+					(
+						case
+						{mode==0} {n.even}
+						{mode==1} {n.odd}
+					)
+					{ indexesEven.collect{|i| toSwap[i]} }
+					{ indexesOdd.collect{|i| toSwap[i]} }
 			}};
-		var campanology = swappers.inject( [this], {
-			|col, f|
-			col ++ [f.(col.last)]
-		});
-		//----------------
-		if (rev)
-		{ ^campanology }
-		{ ^campanology ++ campanology.last
-			.campanology(
-				case
-				{mode==0} {if (size.even) {0} {1}}
-				{mode==1} {if (size.even) {1} {0}},
-				rev:true)[1..size-1] }
+			var campanology = swappers.inject( [this], {
+				|col, f|
+				col ++ [f.(col.last)]
+			});
+			//----------------
+			if (rev)
+			{ ^campanology }
+			{ ^campanology ++ campanology.last
+				.campanology(
+					case
+					{mode==0} {if (size.even) {0} {1}}
+					{mode==1} {if (size.even) {1} {0}},
+					rev:true)[1..size-1] }
+		}
 	}
 
 	kreuzspiel { |ind|

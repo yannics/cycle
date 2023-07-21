@@ -36,6 +36,9 @@ assigns the first switched couple as indices either 0 or 1.
 argument:: rev
 Boolean, stops the algorithm when its input is reversed.
 
+argument:: sym
+Boolean, 'escape from hunt' as a palindromic process for odd number of bells.
+
 returns:: the cycle itself.
 
 discussion::
@@ -43,6 +46,7 @@ code::
 [1, 2, 3, 4].campanology;
 [1, 2, 3, 4].campanology(1);
 [1, 2, 3, 4].campanology(rev:true);
+[1, 2, 3, 4, 5].campanology(sym:true);
 ::
 
 method:: circPerm
@@ -162,9 +166,6 @@ code::
 
 method:: symGroup
 The symmetric group allows to enumerate all cycles from a list of EMPHASIS::n:: elements according to their respective position of the same ordered list (i.e. { 1, 2, ..., EMPHASIS::n:: }) such as each set is a group of permutations as a bijective maps.
-
-argument:: ref
-allows to apply the algorithm on any kind of elements provided that CODE::(this.asBag == ref.asBag)::.
 
 returns:: a list of cycles.
 
