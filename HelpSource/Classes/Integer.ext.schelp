@@ -26,6 +26,9 @@ assigns the first switched couple as indices either 0 or 1.
 argument:: rev
 Boolean, stops the algorithm when its input is reversed.
 
+argument:: sym
+Boolean, 'escape from hunt' as a palindromic process for odd number of bells.
+
 returns:: the cycle itself.
 
 discussion::
@@ -33,6 +36,7 @@ code::
 1234.campanology;
 1234.campanology(1);
 1234.campanology(rev:true);
+12345.campanology(sym:true);
 ::
 
 method:: circPerm

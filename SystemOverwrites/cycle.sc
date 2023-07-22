@@ -397,8 +397,8 @@ version 1.0.6
 		}
 	}
 
-	campanology { |mode=0, rev=false|
-		^this.asDigits.campanology(mode,rev).collect{|it| it.convertDigits}
+	campanology { |mode=0, rev=false, sym=false|
+		^this.asDigits.campanology(mode,rev,sym).collect{|it| it.convertDigits}
 	}
 
 	kaprekar { | base=10 |
