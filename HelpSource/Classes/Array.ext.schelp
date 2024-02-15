@@ -91,7 +91,7 @@ code::
 ::
 
 method:: kreuzspiel
-In 1951, Karlheinz Stockhausen wrotes EMPHASIS::Kreuzspiel:: (EMPHASIS::« Jeux croisés »::) which uses the crossing technique inspired by Olivier Messiaen called EMPHASIS::« des extrêmes au centre »:: as a kind of retrogradation en éventail. This consists to take the first and the last values of a sequence and places them in the middle (or optionally at a given indexed place) by opposite crossing.
+In 1951, Karlheinz Stockhausen wrotes EMPHASIS::Kreuzspiel:: (EMPHASIS::« Jeux croisés »::) which uses the crossing technique inspired by Olivier Messiaen called EMPHASIS::« des extrêmes au centre »:: as a kind of retrogradation EMPHASIS::« en éventail »::. This consists to take the first and the last values of a sequence and places them in the middle (or optionally at a given indexed place) by opposite crossing.
 
 Reference at http://hdl.handle.net/1773/23571
 
