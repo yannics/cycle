@@ -1,6 +1,6 @@
 /*
 Cycle
-version 1.0.6
+version 1.0.7
 -----------------------------------
   Method      |   Class(es)
 --------------|--------------------
@@ -16,6 +16,7 @@ version 1.0.6
 + interlace   | + Array               ---> [(1..4),(1..8),(1..3)].interlace
 + euclidean   | + Integer             ---> 5.euclidean(13,true)
 + campanology | + Array               ---> [1,2,3,4].campanology
++ discreteLog | + Integer             ---> 5.discreteLog(13)
 ----------------------------------
 <by.cmsc@gmail.com>
 */
@@ -375,6 +376,31 @@ version 1.0.6
 		}
 	}
 
+	cycleMidiScale { | int1, int2, root, step=0 |
+		// this : is an Ambitus
+		// int1 is either an array of intervals or a Scale
+		// int2 idem but can be nil if ascScale = descScale
+		var range, theRoot, initInt, compInt, ref1, ref2, res;
+		initInt = if (int1.isKindOf(Scale))
+		{ (int1.degrees++[int1.pitchesPerOctave]).differentiate[1..] }
+		{ int1 };
+		range = initInt.sum;
+		theRoot = if (root.asBoolean) { root.mod(range) } { this[0].mod(range) };
+		compInt = if (int2.isKindOf(Scale))
+		{ (int2.degrees++[int2.pitchesPerOctave]).differentiate[1..] }
+		{ int2 };
+		compInt = if (compInt.isKindOf(Array) && (range == compInt.asArray.sum)) { compInt } { initInt };
+		ref1 = [ theRoot ];
+		ref2 = [ theRoot ];
+		initInt.size.do{|i| ref1 = ref1.add((ref1.last + initInt[i]).mod(range))};
+		compInt.size.do{|i| ref2 = ref2.add((ref2.last + compInt[i]).mod(range))};
+		res = (this[0]..this[1]).select{|i| ref1.asList.includes(i.mod(range))}
+		++
+		(this[1]..this[0]).select{|i| ref2.asList.includes(i.mod(range))}[1..];
+		res = res[0..res.size-2];
+		^res[step..]++res[..step-1]
+	}
+
 }
 
 + Integer {
@@ -631,6 +657,37 @@ version 1.0.6
 	}
 	//-------------------------------------
 
+	modularExp {
+		|exp, md|
+		var res=1.0;
+		exp.asDigits(2).do{|it|
+			res = res * res;
+			if(it == 1) {res = res * this}
+		};
+		^res.mod(md)
+	}
+
+	discreteLog {
+		|mod|
+		var dl = { |a, m, i=1, res|
+			var sm = a.modularExp(i, m);
+			if (res.isNil.not && res.asArray.includes(sm))
+			{
+				res.collect(_.asInteger)
+			}
+			{
+				if ((i>10000) || (sm<=0))
+				{
+					format("you reached the limits of this implementation ... at i = % (previous modular exponential = %)", i, this.modularExp(i-1, m).asInteger).error; nil
+				}
+				{
+					res = res.add(sm);
+					dl.(a, m, i+1, res)
+				}
+			}
+		};
+		^dl.(this, mod)
+	}
 }
 
 + Number {
