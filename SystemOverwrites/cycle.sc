@@ -678,7 +678,7 @@ version 1.0.7
 			{
 				if ((i>10000) || (sm<=0))
 				{
-					format("you reached the limits of this implementation ... at i = % (previous modular exponential = %)", i, this.modularExp(i-1, m).asInteger).error; nil
+					format("you reached the limits of this implementation ... at i = % (previous modular exponential = %)", i, a.modularExp(i-1, m).asInteger).error; nil
 				}
 				{
 					res = res.add(sm);
